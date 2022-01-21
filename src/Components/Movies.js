@@ -19,7 +19,7 @@ export default function Movielist() {
       .catch((err) => console.log(err));
   }, []);
   let EditFav = (e, movie) => {
-    if (e.target.className == "bi bi-heart") {
+    if (e.target.className ==="bi bi-heart") {
       dispatch(favMovie(movie));
       e.target.className = "bi bi-heart-fill text-danger";
     } else {

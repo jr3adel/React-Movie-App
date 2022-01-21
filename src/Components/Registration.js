@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -67,7 +67,7 @@ export default function Register() {
     }
     if (!values.confirmpassword) {
       errors.confirmpassword = "Confirm Password is required";
-    } else if (values.confirmpassword != values.password) {
+    } else if (values.confirmpassword !== values.password) {
       errors.confirmpassword = "Unmatched Password";
     }
 

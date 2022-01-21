@@ -1,59 +1,64 @@
 import React from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from 'react-redux';
-
+import { useSelector } from "react-redux";
+import { LanguageContext } from "../context/LangContext";
 
 export default function Navbar() {
-  const selector=useSelector(state=> state.favorites)
+  // context declaration
+  const {lang , setLang}=useContext(LanguageContext)
+  let changeLang = () => {
+    lang === "en" ? setLang("ar") : setLang("en");
+  };
+  const selector = useSelector((state) => state.favorites);
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-dark">
-      <div className="container-fluid ">
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon "></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav col-12 text-center">
-            <li className="nav-item col-md-2">
-              <Link
-                className="nav-link active text-light"
-                aria-current="page"
-                to="/Movies"
-              >
-                Movies
-              </Link>
-            </li>
-            <li className="nav-item col-md-2 ">
-              <Link className="nav-link text-light" to="/Favorites">
-                Favorites
-              </Link>
-            </li>
-            <li className="nav-item col-md-2">
-              <Link className="nav-link text-light" to="/Form">
-                Login
-              </Link>
-            </li>
-            <li className="nav-item col-md-2">
-              <Link className="nav-link text-light" to="/Registration">
-                Register
-              </Link>
-            </li>
-            <li>
-            <span className=
-                            " m-2 badge rounded-pill bg-warning">
-                                {selector.length}
-                            </span>
-            </li>
-          </ul>
+    <div>
+      <nav className="navbar navbar-expand-lg navbar-light bg-dark text-light">
+        <div className="container-fluid ">
+          <Link className="navbar-brand text-light" to="/">
+            Movie 
+          </Link>
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0 ">
+              <li className="nav-item ">
+                <Link className="nav-link active text-light" to="/">
+                  Home
+                </Link>
+              </li>
+              <li className="nav-item ">
+                <Link className="nav-link text-light" to="/Favorites">
+                  Favorites
+                </Link>
+              </li>
+              <li className="nav-item ">
+                <Link className="nav-link text-light" to="/Upcoming">
+                  Upcoming
+                </Link>
+              </li>
+            </ul>
+            <div className="d-flex">
+              <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                <li className="nav-item">
+                <button className="btn btn-primary" type="submit" onClick={changeLang}>{lang}</button>
+                </li>
+              <li className="m-2 nav-item badge rounded-bill bg-warning">
+                 {selector.length}
+                </li>
+                <li className="nav-item">
+                  <Link className=" nav-link text-light" to="/Form">
+                    Login
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link text-light" to="/Registration">
+                    Register
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </div>
   );
 }

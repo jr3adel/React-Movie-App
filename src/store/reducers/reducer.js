@@ -1,5 +1,6 @@
 const INITIAL_VALUE = {
     favorites: [],
+    upcoming : [],
   };
 
 
@@ -14,6 +15,12 @@ export default function favReducer (state = INITIAL_VALUE, action){
             return {
                 favorites: state.favorites.filter(movie => movie.id !== action.payload.id)
             };
+        case 'UPCOMING':
+            return{
+                ...state,
+                 upComing:[ ...state.upcoming, action.payload]
+            }
+        
         default:
             return state;
     }
